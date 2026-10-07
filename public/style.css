@@ -1,0 +1,83 @@
+/* Uma ficha de estoque: fundo claro, bordas simples e azul nos detalhes. */
+:root {
+  --blue: #274d70;
+  --text: #303633;
+  --muted: #686e69;
+  --line: #d9dcd5;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+/* Tahoma mantém o aspecto de sistema clássico; os controles herdam a mesma fonte. */
+body { margin: 0; background: #fafaf7; color: var(--text); font: 14px/1.5 Tahoma, sans-serif; }
+main { max-width: 1040px; margin: 0 auto; padding: 34px 28px 50px; }
+input, select, button { font: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+/* Uma faixa azul identifica a loja, sem logotipo ou detalhes decorativos. */
+.page-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding: 16px 20px; background: var(--blue); color: #fff; }
+.store-name { margin: 0; font-size: 18px; font-weight: bold; }
+h1 { margin: 0; color: #e0e9f1; font-size: 13px; font-weight: normal; }
+h2 { margin: 0; font-size: 16px; font-weight: bold; }
+
+/* O cadastro segue a ordem de preenchimento, sem painéis ou áreas laterais. */
+.entry { padding: 24px 0 28px; }
+#form-produto { max-width: 680px; display: grid; grid-template-columns: 3fr 2fr; gap: 14px 18px; margin-top: 16px; }
+.full-width { grid-column: 1 / -1; }
+label { display: block; font-size: 13px; }
+.optional { color: var(--muted); font-size: 12px; }
+input:not([type="hidden"]), select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  margin-top: 5px;
+  padding: 6px 9px;
+  border: 1px solid #babfb7;
+  border-radius: 2px;
+  background: #fff;
+  color: var(--text);
+}
+input::placeholder { color: #767d76; }
+.number-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 330px; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+button { padding: 7px 13px; border: 1px solid #babfb7; border-radius: 2px; background: #f1f2ed; color: var(--text); cursor: pointer; }
+button:hover { background: #e6e9e2; }
+button:disabled { opacity: .6; cursor: wait; }
+.primary { border-color: var(--blue); background: var(--blue); color: #fff; font-weight: bold; }
+.primary:hover { background: #1c3d5a; }
+
+/* A busca fica junto da listagem, pois as duas servem para consultar produtos. */
+.inventory { padding-top: 22px; border-top: 1px solid var(--line); }
+.list-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+.lookup { display: flex; align-items: center; gap: 8px; }
+.lookup input { width: 78px; margin: 0; }
+.lookup label { color: var(--muted); }
+#mensagem, #resultado-busca { margin: 0; overflow-wrap: anywhere; }
+#mensagem:not(:empty), #resultado-busca:not(:empty) { margin-top: 14px; padding: 9px 12px; border-left: 3px solid currentColor; font-size: 13px; }
+#resultado-busca:not(:empty) { margin: 0 0 14px; }
+.sucesso { color: #356342; background: #edf3e9; }
+.erro { color: #963c36; background: #faf0ed; }
+
+/* Todos os campos permanecem visíveis; em telas estreitas a tabela pode rolar. */
+.table-scroll { overflow-x: auto; }
+table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); }
+th { background: #eeefe9; font-weight: bold; white-space: nowrap; }
+td { vertical-align: middle; }
+tbody tr:hover { background: #f0f3ec; }
+th:first-child, td:first-child { padding-left: 10px; color: var(--muted); width: 48px; }
+th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6) { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+td:nth-child(3) { color: var(--muted); max-width: 210px; overflow-wrap: anywhere; }
+td:last-child { white-space: nowrap; }
+td button { padding: 3px 0; border: 0; border-radius: 0; background: transparent; color: var(--blue); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+td button + button { margin-left: 12px; color: #963c36; }
+td button:hover { background: transparent; text-decoration-thickness: 2px; }
+#sem-produtos { margin: 0; padding: 24px 10px; color: var(--muted); }
+
+/* No celular, nome e categoria passam para linhas separadas. */
+@media (max-width: 600px) {
+  main { padding: 24px 18px 36px; }
+  #form-produto { grid-template-columns: 1fr; }
+  .number-fields { max-width: none; }
+  .list-heading { align-items: flex-start; flex-direction: column; }
+  .lookup { flex-wrap: wrap; }
+}

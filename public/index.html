@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produtos — Conecta Informática</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <p class="store-name">Conecta Informática</p>
+      <h1>Produtos</h1>
+    </header>
+
+    <section class="entry" aria-labelledby="form-titulo">
+      <h2 id="form-titulo">Novo produto</h2>
+      <!-- O banco gera o ID; este campo oculto indica quando estamos editando. -->
+      <form id="form-produto">
+        <input type="hidden" id="idProduto" name="idProduto" />
+        <label>Nome
+          <input type="text" id="nome" name="nome"  required />
+        </label>
+        <label>Categoria
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione</option>
+            <option>Periféricos</option>
+            <option>Monitores</option>
+            <option>Cabos</option>
+            <option>Armazenamento</option>
+          </select>
+        </label>
+        <label class="full-width">Descrição <span class="optional">(opcional)</span>
+          <input type="text" id="descricao" name="descricao" />
+        </label>
+        <div class="number-fields full-width">
+          <label>Preço (R$)
+            <input type="number" id="preco" name="preco" min="0.01" step="0.01" placeholder="0,00" required />
+          </label>
+          <label>Quantidade
+            <input type="number" id="quantidade" name="quantidade" min="0" step="1" placeholder="0" required />
+          </label>
+        </div>
+        <div class="form-actions full-width">
+          <button type="submit" class="primary">Salvar produto</button>
+          <button type="button" id="btn-cancelar" hidden>Cancelar edição</button>
+        </div>
+      </form>
+      <p id="mensagem" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- A busca consulta um produto por ID; a tabela continua listando todos. -->
+    <section class="inventory" aria-labelledby="lista-titulo">
+      <div class="list-heading">
+        <h2 id="lista-titulo">Produtos cadastrados</h2>
+        <div class="lookup">
+          <label for="busca-id">Buscar por ID</label>
+          <input type="number" id="busca-id" min="1" step="1" placeholder="ID" />
+          <button type="button" id="btn-buscar">Buscar</button>
+        </div>
+      </div>
+      <p id="resultado-busca" role="status" aria-live="polite"></p>
+      <!-- O JavaScript monta as linhas a partir da resposta da API. -->
+      <div class="table-scroll" role="region" aria-label="Lista de produtos" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">ID</th><th scope="col">Nome</th><th scope="col">Descrição</th>
+              <th scope="col">Categoria</th><th scope="col">Preço</th><th scope="col">Qtd.</th><th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-produtos"></tbody>
+        </table>
+      </div>
+      <p id="sem-produtos" hidden>Nenhum produto cadastrado. Adicione o primeiro no formulário acima.</p>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
