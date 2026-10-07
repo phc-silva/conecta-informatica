@@ -1,0 +1,7 @@
+node_modules/
+.env
+banco.db
+banco.db-journal
+banco.db-wal
+banco.db-shm
+banco.db.backup-*
